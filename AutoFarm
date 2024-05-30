@@ -1,0 +1,47 @@
+local L = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+local N = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local W = L:NewWindow(N)
+local S = W:NewSection("Options")
+local S2 = W:NewSection("Credits: OneCreatorX")
+local P = game:GetService("Players").LocalPlayer
+
+local function C(text)
+    if syn then
+        syn.write_clipboard(text)
+    else
+        setclipboard(text)
+    end
+end
+
+local A = false
+local function AC()
+    A = not A
+    while A do
+        wait()
+        local D = workspace:FindFirstChild(P.Name .. "_Drops")
+        if D then
+            for _, h in pairs(D:GetDescendants()) do
+                if h:IsA("BasePart") then
+                    h.Position = P.Character.PrimaryPart.Position
+                end
+            end
+        end
+    end
+end
+
+local B = false
+local function AS()
+    B = not B
+    while B do
+        game:GetService("ReplicatedStorage").Packages._Index["sleitnick_knit@1.4.2"].knit.Services.TycoonService.RF.CleanPets:InvokeServer()
+        wait(1)
+    end
+end
+
+S:CreateToggle("Auto Collect", AC)
+S:CreateToggle("Auto Sell", AS)
+
+P.Idled:Connect(function()
+    game:GetService('VirtualUser'):CaptureController()
+    game:GetService('VirtualUser'):ClickButton2(Vector2.new())
+end)
